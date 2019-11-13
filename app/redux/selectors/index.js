@@ -1,9 +1,9 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 const getSearchState = state => state.search;
 const getSelectedUserState = state => state.search.selectedUser;
 
-export const getSearch = createSelector([getSearchState], (search) => {
+export const getSearch = createSelector([getSearchState], search => {
   const { users, searchText } = search;
 
   return {
@@ -12,6 +12,6 @@ export const getSearch = createSelector([getSearchState], (search) => {
   };
 });
 
-export const getSelectedUser = createSelector([getSelectedUserState], (user) => {
+export const getSelectedUser = createSelector([getSelectedUserState], user => {
   return user;
 });

@@ -1,16 +1,16 @@
-import React from "react";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunkMiddleware from "redux-thunk";
-import { createLogger } from "redux-logger";
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
 
-import reducer from "./app/redux/reducers";
+import reducer from './app/redux/reducers';
 
-import HomeScreen from "./app/screens/Home";
-import UserScreen from "./app/screens/User";
+import HomeScreen from './app/screens/Home';
+import UserScreen from './app/screens/User';
 
 console.disableYellowBox = true;
 
@@ -31,7 +31,7 @@ const AppNavigator = createStackNavigator({
 });
 
 AppNavigator.navigationOptions = {
-  initialRouteName: "Home",
+  initialRouteName: 'Home',
   header: null,
   headerLeft: null,
   headerRight: null

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Container,
   Header,
@@ -15,11 +15,11 @@ import {
   Text,
   InputGroup,
   Icon
-} from "native-base";
-import { connect } from "react-redux";
-import * as SearchActions from "../redux/actions";
-import { bindActionCreators } from "redux";
-import { getSearch } from "../redux/selectors";
+} from 'native-base';
+import { connect } from 'react-redux';
+import * as SearchActions from '../redux/actions';
+import { bindActionCreators } from 'redux';
+import { getSearch } from '../redux/selectors';
 
 const mapStateToProps = state => ({
   search: getSearch(state)
@@ -42,7 +42,7 @@ class Home extends Component {
   gotoUserScreen = user => {
     const { setSelectedUser } = this.props.actions;
     setSelectedUser(user);
-    this.props.navigation.navigate("User");
+    this.props.navigation.navigate('User');
   };
 
   render() {

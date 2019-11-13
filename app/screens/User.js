@@ -13,7 +13,13 @@ import {
   Text
 } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { StyleSheet, Modal, TouchableOpacity, Image, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+  Image,
+  Dimensions
+} from 'react-native';
 import { connect } from 'react-redux';
 
 import { getSelectedUser } from '../redux/selectors';
@@ -105,7 +111,10 @@ class User extends Component {
           transparent={false}
           visible={previewVisible}
         >
-          <TouchableOpacity onPress={() => this.closePreview()} style={styles.previewContainer}>
+          <TouchableOpacity
+            onPress={() => this.closePreview()}
+            style={styles.previewContainer}
+          >
             {selectedPhoto && (
               <Image
                 source={{ uri: selectedPhoto.urls.full }}
