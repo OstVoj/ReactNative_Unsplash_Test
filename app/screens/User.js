@@ -50,7 +50,7 @@ class User extends Component {
     });
   };
 
-  closePreview = photo => {
+  closePreview = () => {
     this.setState({
       previewVisible: false
     });
@@ -124,7 +124,7 @@ class User extends Component {
             {photos &&
               photos.map(photo => (
                 <View style={styles.previewContainer} key={photo.id}>
-                  <TouchableOpacity onPress={() => this.closePreview()}>
+                  <TouchableOpacity onPress={this.closePreview}>
                     <ImageLoad
                       style={styles.previewImage}
                       imageStyle={styles.previewImage}
