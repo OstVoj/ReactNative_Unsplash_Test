@@ -71,7 +71,13 @@ class User extends Component {
 
     return (
       <Container>
-        <Header style={{ paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 1, height: Constants.statusBarHeight + 49 }}>
+        <Header
+          style={{
+            paddingTop:
+              Platform.OS === 'android' ? Constants.statusBarHeight : 1,
+            height: Constants.statusBarHeight + 49
+          }}
+        >
           <Left>
             <Button
               iconLeft
