@@ -16,6 +16,7 @@ import {
   InputGroup,
   Icon
 } from 'native-base';
+import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import * as SearchActions from '../redux/actions';
 import { bindActionCreators } from 'redux';
@@ -58,7 +59,7 @@ class Home extends Component {
           </Body>
           <Right />
         </Header>
-        <Content>
+        <Header style={styles.searchContainer}>
           <Form>
             <Item>
               <InputGroup>
@@ -68,6 +69,8 @@ class Home extends Component {
               </InputGroup>
             </Item>
           </Form>
+        </Header>
+        <Content>
           <List>
             {users && users.length ? (
               users.map(user => (
@@ -89,5 +92,12 @@ class Home extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  searchContainer: {
+    paddingTop: -40,
+    height: 40
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

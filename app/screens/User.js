@@ -13,16 +13,12 @@ import {
   Text
 } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import {
-  StyleSheet,
-  Modal,
-  TouchableOpacity,
-  Image,
-  Dimensions
-} from 'react-native';
+import { StyleSheet, Modal, TouchableOpacity, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getSelectedUser } from '../redux/selectors';
+
+import ImageLoad from '../components/ImageLoad/ImageLoad';
 
 const mapStateToProps = state => ({
   user: getSelectedUser(state)
@@ -116,9 +112,11 @@ class User extends Component {
             style={styles.previewContainer}
           >
             {selectedPhoto && (
-              <Image
-                source={{ uri: selectedPhoto.urls.full }}
+              <ImageLoad
                 style={styles.previewImage}
+                imageStyle={styles.previewImage}
+                source={{ uri: selectedPhoto.urls.full }}
+                placeholderStyle={styles.placeholderImage}
               />
             )}
           </TouchableOpacity>
@@ -153,6 +151,12 @@ const styles = StyleSheet.create({
   previewImage: {
     width: screenWidth,
     height: screenHeight,
+    resizeMode: 'contain',
+    backgroundColor: 'black'
+  },
+  placeholderImage: {
+    width: screenWidth,
+    height: screenHeight / 2,
     resizeMode: 'contain'
   }
 });
