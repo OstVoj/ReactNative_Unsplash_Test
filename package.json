@@ -8,7 +8,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.6",
     "expo": "^35.0.0",
+    "expo-font": "^7.0.0",
     "native-base": "^2.13.8",
     "react": "16.8.3",
     "react-dom": "16.8.3",
@@ -17,6 +19,7 @@
     "react-native-gesture-handler": "^1.5.0",
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^2.0.0-alpha.8",
+    "react-native-swiper": "^1.6.0-nightly.5",
     "react-native-unimodules": "0.6.0",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",

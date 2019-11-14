@@ -7,6 +7,10 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+import { Ionicons } from '@expo/vector-icons';
+
 import reducer from './app/redux/reducers';
 
 import HomeScreen from './app/screens/Home';
@@ -40,7 +44,27 @@ AppNavigator.navigationOptions = {
 const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isReady: false,
+    };
+  }
+
+  async componentDidMount() {
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
+  }
+
   render() {
+    if (!this.state.isReady) {
+      return <AppLoading />;
+    }
+
     return (
       <Provider store={store}>
         <AppContainer />

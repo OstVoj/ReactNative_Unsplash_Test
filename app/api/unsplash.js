@@ -8,5 +8,5 @@ const unsplash = new Unsplash({
 });
 
 export const searchUsers = searchText => {
-  return unsplash.search.users(searchText, 1);
+  return unsplash.search.users(searchText, 1, 20);
 };

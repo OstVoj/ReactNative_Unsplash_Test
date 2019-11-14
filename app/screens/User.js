@@ -13,8 +13,17 @@ import {
   Text
 } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { StyleSheet, Modal, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Modal,
+  TouchableOpacity,
+  Dimensions,
+  ScrollView,
+  View
+} from 'react-native';
 import { connect } from 'react-redux';
+
+import Swiper from 'react-native-swiper';
 
 import { getSelectedUser } from '../redux/selectors';
 
@@ -51,6 +60,8 @@ class User extends Component {
     const { user } = this.props;
     const { name, username, profile_image, photos } = user;
     const { selectedPhoto, previewVisible } = this.state;
+    
+    const selectedPhotoIndex = selectedPhoto ? photos.findIndex(photo => photo.id === selectedPhoto.id) : 0;
 
     return (
       <Container>
@@ -107,19 +118,21 @@ class User extends Component {
           transparent={false}
           visible={previewVisible}
         >
-          <TouchableOpacity
-            onPress={() => this.closePreview()}
-            style={styles.previewContainer}
-          >
-            {selectedPhoto && (
-              <ImageLoad
-                style={styles.previewImage}
-                imageStyle={styles.previewImage}
-                source={{ uri: selectedPhoto.urls.full }}
-                placeholderStyle={styles.placeholderImage}
-              />
-            )}
-          </TouchableOpacity>
+          <Swiper showsButtons={true} index={selectedPhotoIndex}>
+            {photos &&
+              photos.map(photo => (
+                <View style={styles.previewContainer}>
+                  <TouchableOpacity onPress={() => this.closePreview()}>
+                    <ImageLoad
+                      style={styles.previewImage}
+                      imageStyle={styles.previewImage}
+                      source={{ uri: photo.urls.full }}
+                      placeholderStyle={styles.placeholderImage}
+                    />
+                  </TouchableOpacity>
+                </View>
+              ))}
+          </Swiper>
         </Modal>
       </Container>
     );
@@ -150,7 +163,7 @@ const styles = StyleSheet.create({
   },
   previewImage: {
     width: screenWidth,
-    height: screenHeight,
+    height: screenHeight / 2,
     resizeMode: 'contain',
     backgroundColor: 'black'
   },
