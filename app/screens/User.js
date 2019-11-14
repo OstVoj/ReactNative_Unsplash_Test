@@ -123,7 +123,7 @@ class User extends Component {
           <Swiper showsButtons={true} index={selectedPhotoIndex}>
             {photos &&
               photos.map(photo => (
-                <View style={styles.previewContainer}>
+                <View style={styles.previewContainer} key={photo.id}>
                   <TouchableOpacity onPress={() => this.closePreview()}>
                     <ImageLoad
                       style={styles.previewImage}
