@@ -16,8 +16,12 @@ import {
   InputGroup,
   Icon
 } from 'native-base';
-import { StyleSheet } from 'react-native';
+
+import { StyleSheet, Platform } from 'react-native';
 import { connect } from 'react-redux';
+
+import Constants from 'expo-constants';
+
 import * as SearchActions from '../redux/actions';
 import { bindActionCreators } from 'redux';
 import { getSearch } from '../redux/selectors';
@@ -52,7 +56,7 @@ class Home extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{ paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 1, height: Constants.statusBarHeight + 49 }}>
           <Left />
           <Body>
             <Title>Home</Title>

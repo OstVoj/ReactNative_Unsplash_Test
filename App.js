@@ -11,6 +11,10 @@ import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import { Ionicons } from '@expo/vector-icons';
 
+import { StyleProvider } from 'native-base';
+import getTheme from './native-base-theme/components';
+import platform from './native-base-theme/variables/platform';
+
 import reducer from './app/redux/reducers';
 
 import HomeScreen from './app/screens/Home';
@@ -47,7 +51,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isReady: false,
+      isReady: false
     };
   }
 
@@ -55,7 +59,7 @@ export default class App extends React.Component {
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
+      ...Ionicons.font
     });
     this.setState({ isReady: true });
   }
@@ -67,7 +71,9 @@ export default class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <AppContainer />
+        <StyleProvider style={getTheme(platform)}>
+          <AppContainer />
+        </StyleProvider>
       </Provider>
     );
   }

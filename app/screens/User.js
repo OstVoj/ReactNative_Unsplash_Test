@@ -19,8 +19,12 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
-  View
+  View,
+  Platform
 } from 'react-native';
+
+import Constants from 'expo-constants';
+
 import { connect } from 'react-redux';
 
 import Swiper from 'react-native-swiper';
@@ -67,7 +71,7 @@ class User extends Component {
 
     return (
       <Container>
-        <Header>
+        <Header style={{ paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 1, height: Constants.statusBarHeight + 49 }}>
           <Left>
             <Button
               iconLeft
