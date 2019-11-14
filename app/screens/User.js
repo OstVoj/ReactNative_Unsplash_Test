@@ -60,8 +60,10 @@ class User extends Component {
     const { user } = this.props;
     const { name, username, profile_image, photos } = user;
     const { selectedPhoto, previewVisible } = this.state;
-    
-    const selectedPhotoIndex = selectedPhoto ? photos.findIndex(photo => photo.id === selectedPhoto.id) : 0;
+
+    const selectedPhotoIndex = selectedPhoto
+      ? photos.findIndex(photo => photo.id === selectedPhoto.id)
+      : 0;
 
     return (
       <Container>
