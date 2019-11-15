@@ -8,8 +8,6 @@ import {
   Text
 } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
-
 export default class InfiniteListView extends Component {
   static propTypes = {
     loadMore: PropTypes.func,
@@ -37,32 +35,32 @@ export default class InfiniteListView extends Component {
     loadMore(0);
   };
 
-  _handleLoadMore = () => {
-    // console.log('loading More...');
-    
-    // const { loadMore, page } = this.props;
-    // loadMore(page);
+  _handleLoadMore = ({ nativeEvent }) => {
+    let previousOffsetY = 0;
+    if (this.nativeEvent) {
+      previousOffsetY = this.nativeEvent.contentOffset.y;
+    }
+    const offsetY = nativeEvent.contentOffset.y;
+
+    if (
+      offsetY - previousOffsetY > 20 &&
+      offsetY >=
+        nativeEvent.contentSize.height +
+          nativeEvent.contentInset.bottom -
+          nativeEvent.layoutMeasurement.height
+    ) {
+      const { loadMore, page, loadingMore } = this.props;
+
+      if (!loadingMore) {
+        loadMore(page);
+      }
+    }
+
+    this.nativeEvent = nativeEvent;
   };
 
   _renderFooter = () => {
-    if (!this.props.loadingMore) return null;
-
-    return (
-      <View
-        style={{
-          position: 'relative',
-          width: width,
-          height: height,
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          marginTop: 10,
-          marginBottom: 10,
-          borderColor: colors.veryLightPink
-        }}
-      >
-        <ActivityIndicator animating size="large" />
-      </View>
-    );
+    return !this.props.loadingMore && <ActivityIndicator />;
   };
 
   render() {
@@ -80,9 +78,8 @@ export default class InfiniteListView extends Component {
         ListFooterComponent={this._renderFooter}
         onRefresh={this._handleRefresh}
         refreshing={refreshing}
-        onEndReached={this._handleLoadMore}
-        onEndReachedThreshold={0.5}
         horizontal={false}
+        onScroll={this._handleLoadMore}
       />
     ) : (
       <View>

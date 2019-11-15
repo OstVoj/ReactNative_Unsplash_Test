@@ -20,11 +20,16 @@ export const setSelectedUser = user => ({
 });
 
 export const search = (searchText, page) => {
-  return dispatch => {
+  return (dispatch, getState) => {
     dispatch(setLoading(true));
     const result = searchUsers(searchText, page);
     result.then(toJson).then(json => {
-      dispatch(setSearchResult(searchText, json.results));
+      const { users } = getState().search;
+      const { results } = json;
+      const data =
+        page === 1 ? results : users ? users.concat(results) : results;
+
+      dispatch(setSearchResult(searchText, data));
       dispatch(setLoading(false));
     });
   };

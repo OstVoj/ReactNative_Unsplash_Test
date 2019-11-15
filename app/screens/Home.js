@@ -43,7 +43,7 @@ class Home extends Component {
 
   state = {
     searchText: null,
-    page: 1
+    page: 0
   };
 
   loadMore = page => {
@@ -57,7 +57,11 @@ class Home extends Component {
 
   renderItem = item => {
     return (
-      <ListItem onPress={() => this.gotoUserScreen(item)} key={item.id} style={{ width:  screenWidth }}>
+      <ListItem
+        onPress={() => this.gotoUserScreen(item)}
+        key={item.id}
+        style={{ width: screenWidth }}
+      >
         <Text>{item.name}</Text>
       </ListItem>
     );
@@ -116,15 +120,16 @@ class Home extends Component {
           </Form>
         </Header>
         <View style={{ flex: 1 }}>
-          {users && users.length || loading ? (
+          {(users && users.length) || loading ? (
             <InfiniteListView
-              renderItem={this.renderItem}
-              renderItemKey={this.renderItemKey}
+              renderItem={item => this.renderItem(item)}
+              renderItemKey={item => this.renderItemKey(item)}
               loadMore={pageNumber => this.loadMore(pageNumber)}
-              data={users ? users : []}
-              loading={loading ? loading : false}
-              loadingMore={loading ? loading && page !== 0 : false}
-              refreshing={loading ? loading && page === 0 : false}
+              data={users}
+              loading={loading ? loading && page === 1 : false}
+              loadingMore={loading ? loading && page !== 1 : false}
+              refreshing={loading ? loading && page === 1 : false}
+              page={page}
             />
           ) : (
             <ListItem>
