@@ -7,6 +7,6 @@ const unsplash = new Unsplash({
   timeout: 500
 });
 
-export const searchUsers = searchText => {
-  return unsplash.search.users(searchText, 1, 20);
+export const searchUsers = (searchText, page) => {
+  return unsplash.search.users(searchText, page, 20);
 };

@@ -1,2 +1,3 @@
-export const SEARCH = 'SEARCH';
+export const SET_SEARCH_RESULT = 'SET_SEARCH_RESULT';
 export const SET_SELECTED_USER = 'SET_SELECTED_USER';
+export const SET_LOADING = 'SET_LOADING';

@@ -24,13 +24,10 @@ import {
 } from 'react-native';
 
 import Constants from 'expo-constants';
-
 import { connect } from 'react-redux';
-
 import Swiper from 'react-native-swiper';
 
 import { getSelectedUser } from '../redux/selectors';
-
 import ImageLoad from '../components/ImageLoad/ImageLoad';
 
 const mapStateToProps = state => ({

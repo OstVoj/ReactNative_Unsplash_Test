@@ -3,10 +3,15 @@ import { toJson } from 'unsplash-js';
 import * as types from '../constants/ActionTypes';
 import { searchUsers } from '../../api/unsplash';
 
-export const setSearch = (searchText, users) => ({
-  type: types.SEARCH,
+export const setSearchResult = (searchText, users) => ({
+  type: types.SET_SEARCH_RESULT,
   searchText,
   users
+});
+
+export const setLoading = loading => ({
+  type: types.SET_LOADING,
+  loading
 });
 
 export const setSelectedUser = user => ({
@@ -14,11 +19,13 @@ export const setSelectedUser = user => ({
   user
 });
 
-export const search = searchText => {
+export const search = (searchText, page) => {
   return dispatch => {
-    const result = searchUsers(searchText);
+    dispatch(setLoading(true));
+    const result = searchUsers(searchText, page);
     result.then(toJson).then(json => {
-      dispatch(setSearch(searchText, json.results));
+      dispatch(setSearchResult(searchText, json.results));
+      dispatch(setLoading(false));
     });
   };
 };
