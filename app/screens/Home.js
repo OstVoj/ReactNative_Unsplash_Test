@@ -50,9 +50,8 @@ class Home extends Component {
     this.setState({
       page: page + 1
     });
-    const { searchText } = this.state;
     const { search } = this.props.actions;
-    search(searchWord ? searchWord : searchText, page + 1);
+    search(searchWord, page + 1);
   };
 
   renderItem = item => {
@@ -124,7 +123,7 @@ class Home extends Component {
             <InfiniteListView
               renderItem={item => this.renderItem(item)}
               renderItemKey={item => this.renderItemKey(item)}
-              loadMore={pageNumber => this.loadMore(pageNumber)}
+              loadMore={pageNumber => this.loadMore(pageNumber, searchText)}
               data={users}
               loading={loading ? loading && page === 1 : false}
               loadingMore={loading ? loading && page !== 1 : false}
