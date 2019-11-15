@@ -46,13 +46,13 @@ class Home extends Component {
     page: 0
   };
 
-  loadMore = page => {
+  loadMore = (page, searchWord) => {
     this.setState({
       page: page + 1
     });
     const { searchText } = this.state;
     const { search } = this.props.actions;
-    search(searchText, page + 1);
+    search(searchWord ? searchWord : searchText, page + 1);
   };
 
   renderItem = item => {
@@ -75,7 +75,7 @@ class Home extends Component {
     this.setState({
       searchText: text
     });
-    this.loadMore(0);
+    this.loadMore(0, text);
   };
 
   gotoUserScreen = user => {
